@@ -8,12 +8,11 @@ export default function SearchBox({updateInfo}){
     let[city,setCity]=useState("");
     let[error,setError]=useState(false);
     const API_URL="https://api.openweathermap.org/data/2.5/weather";
-    const API_KEY ="4682428d583fadca761258593bbc08c6";
    
 
     let getWeatherInfo=async ()=>{
         try{
-            let result=await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
+            let result=await fetch(`${API_URL}?q=${city}&appid=${import.meta.env.VITE_API_KEY}&units=metric`);
             let jsonResponse=await result.json();
           
             console.log(jsonResponse);
@@ -76,13 +75,13 @@ export default function SearchBox({updateInfo}){
                 value={city}
                 onChange={handleChange}
                 InputLabelProps={{
-                    style: { color: "pink" }  // Change label color
+                    style: { color: "pink" }  
                 }}/>
 
                 <br /><br />
 
                 <Button variant="contained" type="submit" >Search</Button>
-                {error && <p style={{color:"red"}}>No such place exists !</p>}
+                {error && <p style={{color:"red"}}><h2>No such place exists !</h2></p>}
             </form>
         </div>
     )
